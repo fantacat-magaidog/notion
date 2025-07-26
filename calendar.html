@@ -258,10 +258,13 @@ function calendar(widget, data)
             if(actual.getMonth() !== data.getMonth())
                 cela.className = 'fora';
 
-            /* Si es avui el decorem */
-            if(data.getDate() == actual.getDate() &&
-	       data.getMonth() == actual.getMonth())
-		cela.className = 'avui';
+                        var today = new Date();
+            if (actual.getFullYear() === today.getFullYear() &&
+                actual.getMonth() === today.getMonth() &&
+                actual.getDate() === today.getDate()) {
+                cela.className = 'avui';
+            }
+
 
 	    actual.setDate(actual.getDate()+1);
             fila.appendChild(cela);
