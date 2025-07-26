@@ -30,6 +30,7 @@
       border: 2px solid #000000;
       box-shadow: none;
       border-radius: 15px;
+      overflow: hidden;
     }
 
     .month {
@@ -47,7 +48,7 @@
     }
 
     .day-header {
-      background-color: #bdd64f;
+      background-color: #9fc29f;
     }
 
     td, th {
@@ -56,7 +57,7 @@
     }
 
     th {
-      padding: 10px;
+      padding: 6px;
     }
 
     td {
@@ -66,9 +67,10 @@
 
     td > span {
       color: rgb(0, 0, 0);
-      padding: 10px;
+      padding: 4px;
       display: block;
       border: 2px solid transparent;
+      border-radius: 10px;
       transition: border 0.3s ease;
     }
 
@@ -76,6 +78,7 @@
       font-weight: bold;
       background-color: #000000;
       color: #fff;
+      border-radius: 10px;
     }
 
     td.fora > span {
@@ -101,12 +104,28 @@
 
     .boto-next { right: 10px; padding-left: 13px; }
     .boto-prev { left: 10px; padding-right: 13px; }
+
+    #todayBtn {
+      display: block;
+      margin: 20px auto 40px auto;
+      padding: 8px 16px;
+      background-color: #000;
+      color: white;
+      font-size: 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #todayBtn:hover {
+      background-color: #333;
+    }
   </style>
 </head>
 <body>
-  <div class="">
-    <div id="calendar"></div>
-  </div>
+  <button id="todayBtn">回到今天</button>
+  <div id="calendar"></div>
 
   <script>
     var months = [
@@ -204,7 +223,6 @@
             cela.className = 'avui';
           }
 
-          // 淺灰底色：星期日 (0) 和星期六 (6)
           if (d === 0 || d === 6) {
             cela.style.backgroundColor = '#f2f2f2';
           }
@@ -230,7 +248,15 @@
       }, 1000);
     }
 
-    calendar(document.getElementById('calendar'), new Date());
+    const calendarElement = document.getElementById('calendar');
+    let currentDate = new Date();
+    calendar(calendarElement, new Date(currentDate));
+
+    // 回到今天按鈕
+    document.getElementById('todayBtn').addEventListener('click', function () {
+      currentDate = new Date();
+      calendar(calendarElement, new Date(currentDate));
+    });
   </script>
 </body>
 </html>
