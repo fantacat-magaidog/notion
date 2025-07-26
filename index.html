@@ -26,38 +26,37 @@
       border-collapse: collapse;
       table-layout: fixed;
       position: absolute;
-      background-color: #fff;
-      border: 2px solid #000000;
+      background-color: #e4e6e1;
+      border: 2px solid #676662;
       box-shadow: none;
-      border-radius: 15px;
-      overflow: hidden;
+      border-radius: 5px;
     }
 
     .month {
-      background-color: #000;
-      color: #fff;
+      background-color: #676662;
+      color: #e4e6e1;
       font-size: 1.5em;
     }
 
     .year {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: normal;
       display: block;
       text-shadow: none;
-      color: #fff;
+      color: #e4e6e1;
     }
 
     .day-header {
-      background-color: #9fc29f;
+      background-color: #979771;
     }
 
     td, th {
       text-align: center;
-      background-color: #fff;
+      background-color: #e4e6e1;
     }
 
     th {
-      padding: 6px;
+      padding: 8px;
     }
 
     td {
@@ -67,18 +66,16 @@
 
     td > span {
       color: rgb(0, 0, 0);
-      padding: 4px;
+      padding: 8px;
       display: block;
       border: 2px solid transparent;
-      border-radius: 10px;
       transition: border 0.3s ease;
     }
 
     td.avui > span {
       font-weight: bold;
-      background-color: #000000;
-      color: #fff;
-      border-radius: 10px;
+      background-color: #676662;
+      color: #e4e6e1;
     }
 
     td.fora > span {
@@ -104,28 +101,12 @@
 
     .boto-next { right: 10px; padding-left: 13px; }
     .boto-prev { left: 10px; padding-right: 13px; }
-
-    #todayBtn {
-      display: block;
-      margin: 20px auto 40px auto;
-      padding: 8px 16px;
-      background-color: #000;
-      color: white;
-      font-size: 14px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    #todayBtn:hover {
-      background-color: #333;
-    }
   </style>
 </head>
 <body>
-  <button id="todayBtn">回到今天</button>
-  <div id="calendar"></div>
+  <div class="">
+    <div id="calendar"></div>
+  </div>
 
   <script>
     var months = [
@@ -223,6 +204,7 @@
             cela.className = 'avui';
           }
 
+          // 淺灰底色：星期日 (0) 和星期六 (6)
           if (d === 0 || d === 6) {
             cela.style.backgroundColor = '#f2f2f2';
           }
@@ -248,15 +230,7 @@
       }, 1000);
     }
 
-    const calendarElement = document.getElementById('calendar');
-    let currentDate = new Date();
-    calendar(calendarElement, new Date(currentDate));
-
-    // 回到今天按鈕
-    document.getElementById('todayBtn').addEventListener('click', function () {
-      currentDate = new Date();
-      calendar(calendarElement, new Date(currentDate));
-    });
+    calendar(document.getElementById('calendar'), new Date());
   </script>
 </body>
 </html>
