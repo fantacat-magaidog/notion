@@ -228,7 +228,6 @@ function calendar(widget, data)
         fila.innerHTML += '<th class="day-header">' + days_abr[i] + '</th>';
     }
 
-    fila.innerHTML += '<th class="day-header">' + days_abr[0] + '</th>';
     e.appendChild(fila);
 
     /* Obtinc el dia que va acabar el mes anterior */
@@ -246,14 +245,33 @@ function calendar(widget, data)
     {
         var fila = document.createElement('tr');
 
-        for(var d = 1; d < 8; d++)
-        {
-	    var cela = document.createElement('td');
-	    var span = document.createElement('span');
+        for (var d = 0; d < 7; d++) {
+    var cela = document.createElement('td');
+    var span = document.createElement('span');
+    cela.appendChild(span);
+    span.innerHTML = actual.getDate();
 
-	    cela.appendChild(span);
+    // 判斷是否為週六或週日
+    if (d === 0 || d === 6) {
+        cela.style.backgroundColor = '#f2f2f2';  // 淺灰底色
+    }
 
-            span.innerHTML = actual.getDate();
+    if (actual.getMonth() !== data.getMonth()) {
+        cela.className = 'fora';
+    }
+
+    if (
+        actual.getFullYear() === today.getFullYear() &&
+        actual.getMonth() === today.getMonth() &&
+        actual.getDate() === today.getDate()
+    ) {
+        cela.className = 'avui';
+    }
+
+    actual.setDate(actual.getDate() + 1);
+    fila.appendChild(cela);
+}
+
 
             if(actual.getMonth() !== data.getMonth())
                 cela.className = 'fora';
